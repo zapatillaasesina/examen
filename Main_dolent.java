@@ -7,7 +7,7 @@ public class Main_dolent {
 	 * @param index numero per seleccionar la paraula amb la qual es jugara.
 	 * @param p visualitza la paraula.
 	 */
-    static protected String paraules[] = {"hola","programació","casa"};
+    static protected String[] paraules = {"hola","programació","casa"};
     static protected int index;
     static protected String p;
 
@@ -52,7 +52,7 @@ public class Main_dolent {
     static public boolean nova_lletra(char nova) {
         boolean trobada = false;
         String paraula_old = p;
-        p = "";
+        p = "_";
         for (int i=0; i<paraules[index].length(); i++) {
             if (paraules[index].charAt(i) == nova) {
                 p += paraules[index].charAt(i);
