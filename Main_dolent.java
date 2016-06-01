@@ -7,23 +7,21 @@ public class Main_dolent {
 	 * @param index numero per seleccionar la paraula amb la qual es jugara.
 	 * @param p visualitza la paraula.
 	 */
-    static protected String[] paraules = {"hola","programació","casa"};
-    static protected int index;
-    static protected String p;
 
     public static void main(String[] args) {
+    	Random rand = new Random();
+        int index = rand.nextInt(3);
+        String[] paraules = {"hola","programació","casa"};
+        String p= null;
+    	
         System.out.println("Comença el joc!");
         /**
          * es genera un numero aleatori al parametre "index" per seleccionar
          * la paraula per jugar i la representa gracies al parametre "p",
          * que per cada lletra de la paraula es igual a "_".
          */
-
-        Random rand = new Random();
-        index = rand.nextInt(3);
-        for (int i=0; i<paraules[index].length(); i++) {
-            p += "_";
-        }
+        seleccioParaula(index, paraules, p);
+        
 
         System.out.println(p);
 
@@ -36,12 +34,20 @@ public class Main_dolent {
         int num_errors = 0;
 
         while (!p.equals(paraules[index]) && num_errors < 5) {
-            if (!nova_lletra(reader.next().charAt(0))) {
+            if (!nova_lletra(reader.next().charAt(0), paraules, index, p)) {
                 num_errors++;
             }
             System.out.println(p);
         }
    }
+    static public String seleccioParaula(int index, String paraules[], String p){
+    	
+        for (int i=0; i<paraules[index].length(); i++) {
+            p += "_";
+        }
+        return p;
+    }
+
     /**
      * Classe per a que el jugador introdueixi una lletra i comprobar si es
      * troba a la paraula o no. si hi es, canvia "_" per la lletra.
@@ -49,7 +55,7 @@ public class Main_dolent {
      * @return retorna la paraula 
      */
 
-    static public boolean nova_lletra(char nova) {
+    static public boolean nova_lletra(char nova, String paraules[], int index, String p) {
         boolean trobada = false;
         String paraula_old = p;
         p = "_";
